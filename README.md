@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-ZendSkeletonApplication
+
+CodingChallenge
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
+This is a simple, application using the ZF2 MVC layer and module
 systems. This application is meant to be used as a starting place for those
 looking to get their feet wet with ZF2.
 
@@ -118,6 +118,3 @@ it should look something like below:
 
 Restart the nginx, now you should be ready to go!
 =======
-# CodingChallenge
-This repository is my CodingChallenge
->>>>>>> 66b27db061ea8878185d205bd0a82efbee490ae8
