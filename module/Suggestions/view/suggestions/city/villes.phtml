@@ -1,0 +1,82 @@
+<html>
+    
+    <head>
+        <meta charset="utf-8" http-equiv="Content type" content = "text/html"/>
+        <title>Coding Challenge</title>
+        <link rel="stylesheet" type="styleTab.css">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </head>
+    
+    <body>
+        <div id="result" >
+            
+            <form id="afficherVilles" method="get">
+                <input type="text" id="q" class="search" name="q" value="London" onfocus="if(this.value==='London')this.value=''"  onKeyUp="rechercher()" autocomplete="off"/>
+            </form>
+                
+            <script>
+                
+                function rechercher(){
+                    
+                    var len = $('#q').val().length; //Récupère le nombre de lettre dans le champ
+                    console.log(len);                    
+                    
+                    if(len >= 3)//Si il y a minimum 3 lettres dans la barre alors on recherche sinon rien
+                    { 
+                        $.ajax({
+                            url : 'http://localhost/api/public/suggestions', //Appel du script JSON
+                            dataType : 'json', //Spécifie le type de données en JSON
+                            data : {
+                                q : $('#q').val() //Paramètre à récupérer
+                            },
+                            
+                            //La fonction à appeler si la requête aboutie
+                            success : function(donnee){ 
+                                
+                                var obj = donnee;
+                                
+                                $("#tab").html('');
+                                $("#tab2").html('');
+                                $("#tab3").html('');
+                                
+                                //Pour chaque valeur récupéré
+                                for(var i =0; i < obj.suggestions.length; i++ )
+                                {  
+                                    //On envoie dans le tableau prévu à cet effet les données voulues
+                                    $("#tab").append(obj.suggestions[i].name + '<br/>');
+                                    $("#tab2").append(obj.suggestions[i].latitude + '<br/>');
+                                    $("#tab3").append(obj.suggestions[i].longitude + '<br/>');
+                                } 
+                            },
+                            
+                            //Si la requête échoue
+                            error : function(err)
+                            {
+                                console.log("Erreur", err);
+                            }
+                        });
+                    }
+                    else //Si aucune lettre dans le champ on efface les données du tableau
+                    {
+                        $("#tab").html('');
+                        $("#tab2").html('');
+                        $("#tab3").html('');
+                    }
+                }
+            </script>
+                
+            <br/>
+            <!--Affiche les suggestions des villes dans un tableau-->
+            <table class=" table table-bordered table-striped" >
+                
+                <tr><th>Nom</th><th>Latitude</th><th>Longitude</th></tr>
+                <tr><td id="tab"></td><td id="tab2"></td><td id="tab3"></td></tr>
+                
+            </table>    
+        </div>
+    </body>
+</html>
