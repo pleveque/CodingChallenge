@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ZendSkeletonApplication
 =======================
 
@@ -116,3 +117,7 @@ it should look something like below:
     }
 
 Restart the nginx, now you should be ready to go!
+=======
+# CodingChallenge
+This repository is my CodingChallenge
+>>>>>>> 66b27db061ea8878185d205bd0a82efbee490ae8
